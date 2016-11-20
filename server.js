@@ -61,40 +61,31 @@ function createTemplate (data) {
         <title>
           ${title}  
         </title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-            <style>
-                .container{
-                    max-width: 800px;
-                    margin: 0 auto;
-                    color: #404040;
-                    font-family: sans-serif;
-                    padding-top: 60px;
-                    padding-left: 20px;
-                    padding-right: 20px;
-        }  
-            </style>
-         </head>  
+            <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+            <link href="/ui/style.css" rel="stylesheet" /> 
+        </head>  
         <body>
-      <div class="container">
-          <div>
-              <a href="/">Home</a>
-          </div>
-          <hr/>
-          <h3>
-              ${heading}
-          </h3>
-          <div>
-              ${date.toDateString()}
-          </div>
-          <div>
-              ${content}
-          </div>
+            <div class="container">
+                <div>
+                    <a href="/">Home</a>
+                </div>
+                <hr/>
+                <h3>
+                    ${heading}
+                </h3>
+                <div>
+                     ${date.toDateString()}
+                </div>
+                <div>
+                 ${content}
+                </div>
             </div>
         </body>
     </html>
     `;
     return htmlTemplate;
 }
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
