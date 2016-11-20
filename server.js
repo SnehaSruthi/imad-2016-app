@@ -92,11 +92,18 @@ app.post('/login', function(req, res){
     var username = req.body.username;
     var password = req.body.password;
     
-    pool.query('SELECT * FROM "user" (username, password) VALUES (&1, &2)', [username, dbString], function(err, result){
+    pool.query('SELECT * from "user" username = $1', [username], function(err, result){
         if (err){
            res.status(500).send(err.toString());
        } else{
-           res.send('User successfully created: ' + username);
+           if(results.rows.length === 0) {
+               res.send(403).send('username/password is invalid');
+           } else {
+             //Match the password
+             var dbString = results.rows[0].password;
+             res.send('User successfully created: ' + username);  
+           }
+           
        }
     });
 });
